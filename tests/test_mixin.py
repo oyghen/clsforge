@@ -1,4 +1,4 @@
-from enum import Enum
+from enum import Enum, StrEnum, auto
 
 import pytest
 
@@ -110,3 +110,38 @@ class TestEnumMixin:
     def test_enum_comparison(self):
         assert self.SomeEnum.FIRST == self.SomeEnum.FIRST
         assert self.SomeEnum.FIRST != self.SomeEnum.SECOND
+
+
+class TestStrEnumMixin:
+    class SomeStrEnum(EnumMixin, StrEnum):
+        FIRST = auto()
+        SECOND = auto()
+        THIRD = auto()
+
+        @classmethod
+        def get_selection(cls) -> list[str]:
+            return [cls.FIRST, cls.THIRD]
+
+    def test_get_members(self):
+        all_members = self.SomeStrEnum.get_members()
+        assert isinstance(all_members, tuple)
+        assert len(all_members) == 3
+        assert all(isinstance(mbr, self.SomeStrEnum) for mbr in all_members)
+
+    def test_get_count(self):
+        assert self.SomeStrEnum.get_count() == 3
+
+    def test_get_names(self):
+        names = self.SomeStrEnum.get_names()
+        assert isinstance(names, tuple)
+        assert names == ("FIRST", "SECOND", "THIRD")
+
+    def test_get_values(self):
+        values = self.SomeStrEnum.get_values()
+        assert isinstance(values, tuple)
+        assert values == ("first", "second", "third")
+
+    def test_get_selection(self):
+        result = self.SomeStrEnum.get_selection()
+        assert result == [self.SomeStrEnum.FIRST, self.SomeStrEnum.THIRD]
+        assert result == ["first", "third"]
