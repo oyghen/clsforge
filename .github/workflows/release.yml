@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: Publish library and CLI app to PyPI
+    name: Publish library to PyPI
     runs-on: ubuntu-latest
 
     environment:
