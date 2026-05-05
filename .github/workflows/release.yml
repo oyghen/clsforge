@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Publish library and CLI app to PyPI
+    runs-on: ubuntu-latest
+
+    environment:
+      name: pypi
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install Python
+        run: uv python install
+
+      - name: Sync workspace
+        run: uv sync --locked --all-packages --all-extras
+
+      - name: Build all packages
+        run: uv build --no-sources --all-packages
+
+      - name: Smoke test (wheel)
+        run: |
+          uv run --isolated --no-project \
+            --with dist/clsforge-*.whl \
+            tests/smoke_test.py
+
+      - name: Smoke test (source distribution)
+        run: |
+          uv run --isolated --no-project \
+            --with dist/clsforge-*.tar.gz \
+            tests/smoke_test.py
+
+      - name: Publish all packages
+        run: uv publish
