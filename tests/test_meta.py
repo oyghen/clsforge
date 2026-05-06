@@ -1,7 +1,6 @@
 import pytest
 
-from clsforge.exceptions import FrozenClassError
-from clsforge.meta import FrozenClassMeta
+from clsforge import FrozenClassError, FrozenClassMeta
 
 
 class BaseClass(metaclass=FrozenClassMeta):

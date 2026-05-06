@@ -1,4 +1,7 @@
-from clsforge.exceptions import FrozenClassError
+__all__ = ["FrozenClassMeta"]
+
+
+from clsforge import FrozenClassError
 
 
 class FrozenClassMeta(type):

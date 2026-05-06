@@ -2,7 +2,7 @@ from enum import Enum, StrEnum, auto
 
 import pytest
 
-from clsforge.mixin import EnumMixin
+from clsforge import EnumMixin
 
 
 class TestEnumMixin:
