@@ -5,6 +5,27 @@ from typing import Any, cast
 
 
 class EnumMixin:
+    """Utility mixin for enum classes.
+
+    Examples
+    --------
+    >>> from enum import Enum
+    >>> class Color(EnumMixin, Enum):
+    ...     RED = "red"
+    ...     BLUE = "blue"
+    ...
+    >>> Color.get_count()
+    2
+    >>> Color.get_names()
+    ('RED', 'BLUE')
+    >>> Color.get_values()
+    ('red', 'blue')
+    >>> Color.get_member_by_name("RED")
+    <Color.RED: 'red'>
+    >>> Color.get_member_by_value("red")
+    <Color.RED: 'red'>
+    """
+
     @classmethod
     def get_members(cls) -> tuple[Enum, ...]:
         """Return a tuple of all members."""
