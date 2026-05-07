@@ -5,6 +5,24 @@ from clsforge import FrozenClassError
 
 
 class FrozenClassMeta(type):
+    """Metaclass for immutable class definitions.
+
+    Examples
+    --------
+    >>> class UserTable(metaclass=FrozenClassMeta):
+    ...     NAME = "users"
+    ...     PRIMARY_KEY = "id"
+    ...
+    >>> UserTable.NAME
+    'users'
+    >>> UserTable.PRIMARY_KEY
+    'id'
+    >>> UserTable.PRIMARY_KEY = "user_id"  # doctest: +SKIP
+    Traceback (most recent call last):
+        ...
+    FrozenClassError
+    """
+
     def __call__(cls, *args, **kwargs):
         raise FrozenClassError(
             f"Cannot instantiate frozen class '{cls.__name__}'. "
