@@ -27,7 +27,7 @@ class EnumMixin:
         return tuple(member.value for member in cls.get_members())
 
     @classmethod
-    def get_member_by_name(cls, name: str, preview: int = 3) -> Enum:
+    def get_member_by_name(cls, name: str, preview: int = 6) -> Enum:
         """Return an enum member by its name."""
         enum_cls = cast(type[Enum], cls)
         try:
@@ -40,7 +40,7 @@ class EnumMixin:
             ) from exc
 
     @classmethod
-    def get_member_by_value(cls, value: Any, preview: int = 3) -> Enum:
+    def get_member_by_value(cls, value: Any, preview: int = 6) -> Enum:
         """Return an enum member by its value."""
         enum_cls = cast(type[Enum], cls)
         try:
