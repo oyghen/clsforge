@@ -10,6 +10,7 @@ class EnumMixin:
     Examples
     --------
     >>> from enum import Enum
+    >>>
     >>> class Color(EnumMixin, Enum):
     ...     RED = "red"
     ...     BLUE = "blue"
