@@ -14,9 +14,7 @@ from pathlib import Path
 from typing import Annotated
 
 import purekit as pk  # type: ignore
-import typer
-
-LIB_NAME = "clsforge"
+import typer  # type: ignore
 
 ROOT = Path(__file__).resolve().parent
 ROOT_PYPROJECT = ROOT / "pyproject.toml"
