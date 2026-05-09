@@ -1,6 +1,6 @@
 __all__ = ["ClsForgeError", "FrozenClassError", "InvalidChoiceError"]
 
-from collections.abc import Sequence
+from collections.abc import Collection
 from typing import TypeVar
 
 T = TypeVar("T")
@@ -15,5 +15,5 @@ class FrozenClassError(ClsForgeError, TypeError): ...
 class InvalidChoiceError(ClsForgeError, ValueError):
     """Raised when a value is not one of the allowed choices."""
 
-    def __init__(self, choice: T, choices: Sequence[T]) -> None:
+    def __init__(self, choice: T, choices: Collection[T]) -> None:
         super().__init__(f"invalid choice {choice!r}: expected one of {choices!r}")
